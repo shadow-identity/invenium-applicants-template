@@ -1,4 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 
 import login from '../../graphql/loginResolver';
 import me from '../../graphql/meResolver';
@@ -52,12 +54,11 @@ const resolvers = {
   },
 };
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
     introspection: true,
-    playground: true,
     context: { req },
   });
 

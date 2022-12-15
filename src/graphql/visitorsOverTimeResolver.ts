@@ -1,4 +1,5 @@
-export default function visitorsOverTimeResolver(parent, args, context) {
+// @ts-ignore
+export default function visitorsOverTimeResolver(__, args: any, context: any) {
   if (args.where.date === '2022-01') {
     return [
       {
