@@ -1,3 +1,5 @@
+import {VisitorsArray} from '../types'
+
 const basicRequest = (query: string, variables: any) => {
 	return fetch('http://localhost:3000/api/graphql', {
 		method: 'POST',
@@ -15,16 +17,25 @@ export const loginRequest = async (email: string, password: string) => {
     }
   }
 `, {})
-	return response.json().then((data) => data.data.login.token).catch(() => false)
+	return response.json()
+		.then((data) => data.data.login.token)
+		.catch(() => false)
 }
 
-// export const visitorsOverTimeRequest = async (token: string) => {
-// 	const response = await basicRequest(`query {
-//     visitorsOverTime {
-//       date
-//       visitors
-//     }
-//   }
-// `, {})
-// 	return response.json()
-// }
+export const visitorsOverTimeRequest = async (date: string): Promise<VisitorsArray | false> => {
+	const response = await basicRequest(`
+		query {
+		  visitorsOverTime(where: { date: "${date}" }) {
+		    time
+		    visitors {
+		      avg
+		      rel
+		      sum
+		    }
+		  }
+		}
+	`, {})
+	return response.json()
+		.then((data) => data.data.visitorsOverTime)
+		.catch(() => false)
+}

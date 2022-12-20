@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { Login } from "./Login/Login"
 import React, { useState } from "react"
+import { VisitorsChart } from './VisitorsChart/VisitorsChart'
 
 export default function Home() {
 	const [token, setToken] = useState('')
@@ -18,11 +19,11 @@ export default function Home() {
 			</Head>
 			<header>
 				<h1>
-					Login
+					{token ? 'Hi': 'Login'}
 				</h1>
 			</header>
 			<main>
-				{token ? null : <Login onToken={handleNewToken} />}
+				{token ? <VisitorsChart /> : <Login onToken={handleNewToken} />}
 			</main>
 		</div>
 	)
