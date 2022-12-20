@@ -1,9 +1,6 @@
 {
-  "extends": ["next", "plugin:prettier/recommended", "prettier"],
+  "extends": ["next"],
   "plugins": ["simple-import-sort"],
   "root": true,
-  "rules": {
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error"
-  }
+  "rules": {}
 }
